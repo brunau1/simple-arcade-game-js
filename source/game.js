@@ -43,7 +43,7 @@ function movePallet() {
 }
 
 function canvasColision(pos, speed, size) {
-    if (pos.y >= canvas.height - size.height) speed.yy = -speed.y
+    if (pos.y >= canvas.height - size.height) speed.y = -speed.y
     else if (pos.y <= 0) speed.y = -speed.y
 
     if (pos.x >= canvas.width - size.width) speed.x = -speed.x
