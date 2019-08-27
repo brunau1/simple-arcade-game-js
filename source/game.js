@@ -9,7 +9,7 @@ var ball = {
 var pallet = {
     pos: { x: 0, y: 0 },
     speed: { x: 0, y: 8 },
-    size: { width: 15, height: 500 }
+    size: { width: 15, height: 150 }
 }
 
 function getCanvasAndContext() {
