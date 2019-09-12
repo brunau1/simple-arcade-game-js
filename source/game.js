@@ -1,5 +1,4 @@
-const { canvas, context } = getCanvasAndContext();
-
+const game = new Game();
 class Game {
     constructor() {
         getCanvasAndContext();
@@ -25,9 +24,6 @@ class GameObject {
 }
 
 class Ball extends GameObject {
-    constructor(context) {
-        super(context);
-    }
     constructor(context, posX, posY, velocityX, velocityY, width, height) {
         super(context, posX, posY, velocityX, velocityY);
         this.setSizes(width, height);
@@ -39,24 +35,22 @@ class Ball extends GameObject {
         context.fillStyle = this.isColliding ? 'red' : 'green';
         context.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
     }
+    update(){
+        this.pos.x += this.speed.x;
+        this.pos.y += this.speed.y;        
+    }
 }
 
-var ball = {
-    pos: { x: 400, y: 300 },
-    speed: { x: 5, y: 5 },
-    size: { width: 10, height: 10 }
-}
-
-var pallet = {
-    pos: { x: 0, y: 0 },
-    speed: { x: 0, y: 8 },
-    size: { width: 15, height: 150 }
-}
-
-function getCanvasAndContext() {
-    const canvas = document.querySelector('canvas');
-    const context = canvas.getContext('2d');
-    return { canvas, context }
+const gameObjects;
+function createGameObjects() {
+    for (let i = 0; i < 20; i++) {
+        gameObjects.push(new Ball(
+            game.context,
+            Math.floor(Math.random() * 800),
+            Math.floor(Math.random() * 600),
+            5, 5, 40, 40
+        ))
+    }
 }
 
 window.onload = () => {
