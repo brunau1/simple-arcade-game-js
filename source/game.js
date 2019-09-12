@@ -1,4 +1,45 @@
-const { canvas, context } = getCanvasAndContext()
+const { canvas, context } = getCanvasAndContext();
+
+class Game {
+    constructor() {
+        getCanvasAndContext();
+    }
+    getCanvasAndContext() {
+        this.canvas = document.querySelector('canvas');
+        this.context = canvas.getContext('2d');
+    }
+}
+class GameObject {
+    constructor(context, posX, posY, velocityX, velocityY) {
+        this.setPosition(posX, posY);
+        this.setVelocity(velocityX, velocityY);
+        this.context = context;
+        this.isColliding = false;
+    }
+    setPosition(posX, posY) {
+        this.pos = { x: posX, y: posY };
+    }
+    setVelocity(velocityX, velocityY) {
+        this.speed = { x: velocityX, y: velocityY };
+    }
+}
+
+class Ball extends GameObject {
+    constructor(context) {
+        super(context);
+    }
+    constructor(context, posX, posY, velocityX, velocityY, width, height) {
+        super(context, posX, posY, velocityX, velocityY);
+        this.setSizes(width, height);
+    }
+    setSizes(width, height) {
+        this.size = { width: width, height: height };
+    }
+    draw() {
+        context.fillStyle = this.isColliding ? 'red' : 'green';
+        context.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
+    }
+}
 
 var ball = {
     pos: { x: 400, y: 300 },
